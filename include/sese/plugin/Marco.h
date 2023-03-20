@@ -9,7 +9,7 @@
 #endif
 
 #define DEFINE_MODULE_INFO(name, version, description)                    \
-    SESE_EXTERN sese::plugin::ModuleInfo *getModuleInfo() {                \
+    SESE_EXTERN sese::plugin::ModuleInfo *getModuleInfo() {               \
         static sese::plugin::ModuleInfo info{name, version, description}; \
         return &info;                                                     \
     }
@@ -22,7 +22,7 @@
     }
 
 #define DEFINE_CLASS_FACTORY(...)                                 \
-    SESE_EXTERN sese::plugin::ClassFactory *getFactory() {         \
+    SESE_EXTERN sese::plugin::BaseClassFactory *getFactory() {    \
         static sese::plugin::ClassFactory factory({__VA_ARGS__}); \
         return &factory;                                          \
     }

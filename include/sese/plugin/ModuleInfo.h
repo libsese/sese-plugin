@@ -3,9 +3,13 @@
 #include "sese/plugin/ClassFactory.h"
 
 namespace sese::plugin {
+    /// 模块基础信息
     struct ModuleInfo {
-        const char *moduleName;
-        const char *versionString;
-        const char *description;
+        /// 模块名称
+        const char *moduleName = nullptr;
+        /// 模块版本
+        const char *versionString = nullptr;
+        /// 模块描述
+        const char *description = nullptr;
     };
 }// namespace sese::plugin

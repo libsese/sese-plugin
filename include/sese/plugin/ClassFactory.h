@@ -1,14 +1,14 @@
 #pragma once
 
-#include "sese/plugin/BaseClass.h"
+#include "sese/plugin/BaseClassFactory.h"
 
-#include <string>
 #include <functional>
 #include <initializer_list>
 #include <unordered_map>
 
 namespace sese::plugin {
-    class ClassFactory {
+    /// 类工厂内建实现
+    class ClassFactory : public BaseClassFactory {
     public:
         using InitListType = std::pair<std::string, std::function<std::shared_ptr<BaseClass>()>>;
         using MapType = std::unordered_map<std::string, std::function<std::shared_ptr<BaseClass>()>>;
@@ -17,7 +17,7 @@ namespace sese::plugin {
         ClassFactory(ClassFactory &&classFactory) = delete;
         ClassFactory(const ClassFactory &classFactory) = delete;
 
-        BaseClass::Ptr createClassWithId(const std::string &id) noexcept;
+        BaseClass::Ptr createClassWithId(const std::string &id) noexcept override;
 
         template<typename Class>
         std::shared_ptr<Class> createClassWithIdAs(const std::string &id) noexcept {
