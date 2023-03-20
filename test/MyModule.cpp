@@ -1,6 +1,7 @@
 #include "sese/plugin/Marco.h"
 
 class Printable : public sese::plugin::BaseClass {
+public:
     virtual void run() = 0;
 };
 
