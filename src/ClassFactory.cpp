@@ -1,7 +1,8 @@
 #include "sese/plugin/Marco.h"
 #include "sese/plugin/ClassFactory.h"
 
-sese::plugin::ClassFactory::ClassFactory(const std::initializer_list<sese::plugin::ClassFactory::InitListType> &initializerList) noexcept {
+sese::plugin::ClassFactory::ClassFactory(const std::initializer_list<sese::plugin::ClassFactory::InitListType> &initializerList) noexcept
+    : sese::plugin::BaseClassFactory() {
     for (decltype(auto) pair : initializerList) {
         map.insert(pair);
     }
