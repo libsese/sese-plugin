@@ -21,3 +21,8 @@ target_sources(
         Plugin PRIVATE
         src/ClassFactory.cpp
 )
+
+option(SESE_PLUGIN_BUILD_TEST OFF)
+if (SESE_PLUGIN_BUILD_TEST)
+    add_subdirectory(test)
+endif ()
