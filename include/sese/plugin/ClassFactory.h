@@ -14,6 +14,8 @@ namespace sese::plugin {
         using MapType = std::unordered_map<std::string, std::function<std::shared_ptr<BaseClass>()>>;
 
         ClassFactory(const std::initializer_list<InitListType> &initializerList) noexcept;
+        ClassFactory(ClassFactory &&classFactory) = delete;
+        ClassFactory(const ClassFactory &classFactory) = delete;
 
         BaseClass::Ptr createClassWithId(const std::string &id) noexcept;
 
