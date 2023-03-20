@@ -34,9 +34,9 @@ endif ()
 include(GNUInstallDirs)
 include(CMakePackageConfigHelpers)
 configure_package_config_file(
-        ${PROJECT_SOURCE_DIR}/cmake/SesePluginConfig.cmake.in
-        ${PROJECT_BINARY_DIR}/SesePluginConfig.cmake
-        INSTALL_DESTINATION lib/cmake/sese.plugin
+        ${PROJECT_SOURCE_DIR}/cmake/sese-plugin-config.cmake.in
+        ${PROJECT_BINARY_DIR}/sese-plugin-config.cmake
+        INSTALL_DESTINATION lib/cmake/sese-plugin
 )
 
 install(
@@ -54,17 +54,17 @@ install(
 )
 
 install(
-        FILES "${PROJECT_BINARY_DIR}/SesePluginConfig.cmake"
-        DESTINATION lib/cmake/sese
+        FILES "${PROJECT_BINARY_DIR}/sese-plugin-config.cmake"
+        DESTINATION lib/cmake/sese-plugin
 )
 
 install(
-        FILES "${PROJECT_BINARY_DIR}/SesePluginConfig.cmake"
-        DESTINATION debug/lib/cmake/sese
+        FILES "${PROJECT_BINARY_DIR}/sese-plugin-config.cmake"
+        DESTINATION debug/lib/cmake/sese-plugin
 )
 
 install(
         EXPORT SesePluginTargets
-        DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/sese.plugin
+        DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/sese-plugin
         NAMESPACE Sese::
 )
