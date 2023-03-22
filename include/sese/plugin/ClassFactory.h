@@ -1,31 +1,36 @@
 #pragma once
 
-#include "sese/plugin/BaseClassFactory.h"
+#include "sese/plugin/BaseClass.h"
 
+#include <map>
+#include <string>
 #include <functional>
 #include <initializer_list>
-#include <unordered_map>
 
 namespace sese::plugin {
     /// 类工厂内建实现
-    class ClassFactory : public BaseClassFactory {
+    class ClassFactory {
     public:
-        using InitListType = std::pair<std::string, std::function<std::shared_ptr<BaseClass>()>>;
-        using MapType = std::unordered_map<std::string, std::function<std::shared_ptr<BaseClass>()>>;
+        struct RegisterInfo {
+            const type_info *info;
+            std::function<std::shared_ptr<BaseClass>()> builder;
+        };
+        using RegisterInfoMapType = std::map<std::string, RegisterInfo>;
+        using ParamListType = std::initializer_list<std::pair<std::string, RegisterInfo>>;
 
-        ClassFactory(const std::initializer_list<InitListType> &initializerList) noexcept;
+        ClassFactory(const ParamListType &initializerList) noexcept;
         ClassFactory(ClassFactory &&classFactory) = delete;
         ClassFactory(const ClassFactory &classFactory) = delete;
 
-        BaseClass::Ptr createClassWithId(const std::string &id) noexcept override;
+        /// 创建某个已注册类的实例
+        /// \param id 类注册名
+        BaseClass::Ptr createClassWithId(const std::string &id) noexcept;
 
-        template<typename Class>
-        std::shared_ptr<Class> createClassWithIdAs(const std::string &id) noexcept {
-            BaseClass::Ptr baseClass = createClassWithId(id);
-            return std::reinterpret_pointer_cast<Class>(baseClass);
-        }
+        /// 获取已注册类的类型信息
+        /// \return 类信息映射表
+        const RegisterInfoMapType &getRegisterClassInfo() noexcept;
 
-    private:
-        MapType map;
+    protected:
+        RegisterInfoMapType infoMap{};
     };
 }// namespace sese::plugin

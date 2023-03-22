@@ -1,19 +1,21 @@
 #include "sese/plugin/Marco.h"
 #include "sese/plugin/ClassFactory.h"
 
-sese::plugin::ClassFactory::ClassFactory(const std::initializer_list<sese::plugin::ClassFactory::InitListType> &initializerList) noexcept
-    : sese::plugin::BaseClassFactory() {
+sese::plugin::ClassFactory::ClassFactory(const sese::plugin::ClassFactory::ParamListType &initializerList) noexcept {
     for (decltype(auto) pair : initializerList) {
-        map.insert(pair);
+        infoMap[pair.first] = pair.second;
     }
 }
 
 sese::plugin::BaseClass::Ptr sese::plugin::ClassFactory::createClassWithId(const std::string &id) noexcept {
-    auto iterator = map.find(id);
-    if (iterator != map.end()) {
-        return iterator->second();
+    auto iterator = infoMap.find(id);
+    if (iterator != infoMap.end()) {
+        return iterator->second.builder();
     } else {
         return nullptr;
     }
 }
 
+const sese::plugin::ClassFactory::RegisterInfoMapType &sese::plugin::ClassFactory::getRegisterClassInfo() noexcept {
+    return infoMap;
+}

@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.14)
-project(sese.plugin VERSION 0.1)
+project(sese.plugin VERSION 0.2.0)
 
 set(CMAKE_CXX_STANDARD 20)
 
