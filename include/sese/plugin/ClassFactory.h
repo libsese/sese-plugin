@@ -4,6 +4,7 @@
 
 #include <map>
 #include <string>
+#include <typeinfo>
 #include <functional>
 #include <initializer_list>
 
@@ -12,7 +13,7 @@ namespace sese::plugin {
     class ClassFactory {
     public:
         struct RegisterInfo {
-            const type_info *info;
+            const std::type_info *info;
             std::function<std::shared_ptr<BaseClass>()> builder;
         };
         using RegisterInfoMapType = std::map<std::string, RegisterInfo>;
