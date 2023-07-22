@@ -2,7 +2,7 @@
 
 #include "sese/plugin/ModuleInfo.h"
 
-#ifdef WIN32
+#ifdef _WIN32
 #define SESE_EXTERN extern "C" __declspec(dllexport)
 #else
 #define SESE_EXTERN extern "C"

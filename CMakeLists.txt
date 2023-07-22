@@ -1,18 +1,19 @@
-cmake_minimum_required(VERSION 3.14)
-project(sese.plugin VERSION 0.2.1)
+cmake_minimum_required(VERSION 3.10)
+project(sese.plugin VERSION 0.2.2)
 
-set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD 17)
 
 add_library(Plugin STATIC)
 
-if (WIN32)
-    set_target_properties(Plugin PROPERTIES WINDOWS_EXPORT_ALL_SYMBOLS ON)
+if (CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
     target_compile_options(Plugin PRIVATE /utf-8)
 endif ()
 
 if (CMAKE_SYSTEM_NAME MATCHES "Linux")
     target_compile_options(Plugin PRIVATE -fPIC)
-endif()
+elseif (CMAKE_SYSTEM_NAME MATCHES "Windows")
+    set_target_properties(Plugin PROPERTIES WINDOWS_EXPORT_ALL_SYMBOLS ON)
+endif ()
 
 target_include_directories(
         Plugin
