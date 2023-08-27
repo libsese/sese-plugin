@@ -3,6 +3,8 @@
 cmake-*
 build
 .cache
+bazel-*
+.clwb
 
 # Prerequisites
 *.d
