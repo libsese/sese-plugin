@@ -1,11 +1,11 @@
 cmake_minimum_required(VERSION 3.10)
-project(sese-plugin VERSION 0.2.2)
+project(sese-plugin VERSION 0.2.3)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_library(Plugin STATIC)
+add_library(Plugin)
 
-if (CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
+if (${MSVC})
     target_compile_options(Plugin PRIVATE /utf-8)
 endif ()
 
@@ -25,6 +25,13 @@ target_include_directories(
 target_sources(
         Plugin PRIVATE
         src/ClassFactory.cpp
+)
+
+set_target_properties(
+        Plugin
+        PROPERTIES
+        OUTPUT_NAME "sese.plugin"
+        PREFIX ""
 )
 
 option(SESE_PLUGIN_BUILD_TEST OFF)
